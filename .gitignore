@@ -9,6 +9,12 @@
 # Ignore bundler config.
 /.bundle
 
+# Ignore RubyMine config
+.idea
+
+# Ignore asdf config
+.tools-versions
+
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*

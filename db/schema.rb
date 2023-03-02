@@ -16,14 +16,7 @@ ActiveRecord::Schema.define(version: 2018_07_10_000847) do
   enable_extension "plpgsql"
 
   create_table "check_ins", force: :cascade do |t|
-    t.integer "patient_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "patients", force: :cascade do |t|
-    t.date "birthdate"
-    t.string "patient_number"
+    t.string "patient_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
