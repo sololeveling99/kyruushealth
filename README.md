@@ -18,7 +18,7 @@ The setup process will install dependencies, and automatically configure the dat
 
 ## First passing spec
 
-Now that your repo is setup, we can start the fun stuff!  Go ahead and run `bundle exec rspec`. You should see one failing spec. As a warm up, add _just enough_ code to make this test pass. Then do a git commit.
+Now that your repo is setup, we can start the fun stuff!  First create a new branch off of main to develop on. Next go ahead and run `bundle exec rspec`. You should see one failing spec. As a warm up, add _just enough_ code to make this test pass. Then do a git commit.
 
 ## Part 1: Adding a Patient Questionnaire
 
@@ -118,4 +118,4 @@ As with part 1, feel free to add as many commits and tests as you feel are appro
 
 ## Submitting your work
 
-When you are ready for us to review your work, please email your interviewer with [patch file(s)](https://thoughtbot.com/blog/send-a-patch-to-someone-using-git-format-patch) containing your changes
+When you are ready for us to review your work, please create a PR to the main branch containing your commits from part 1 and part 2.
