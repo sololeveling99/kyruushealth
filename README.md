@@ -1,6 +1,6 @@
 # Kyruus Medical Group Interview Project
 
-Thanks for being interested in coming to work here at Kyruus. Our team values building, reviewing, and pairing on well-crafted applications.  This repo was built to test how you build applications and how you would fit in working with the team at Kyruus.  It's a simplified version of our Check-in application, and will give you some insight into our product development process.  If you'd like to learn more about our Check-in product please visit our [website](https://epionhealth.com/patient-engagement-software/patient-check-in-software/)
+Thanks for being interested in coming to work here at Kyruus. Our team values building, reviewing, and pairing on well-crafted applications.  This repo was built to test how you build applications and how you would fit in working with the team at Kyruus.  It's a simplified version of our Check-in application, and will give you some insight into our product development process.  If you'd like to learn more about our Check-in product please visit our [website](https://epionhealth.com/patient-engagement-software/patient-check-in-software/).
 
 ## Setup
 
@@ -10,15 +10,16 @@ Please go ahead and clone this repo and run `bin/setup` to get everything up and
 
 We use the following software versions (if you have previous releases and they work well there's no need to update):
 
-* Postgres 11.3
-* Node 12.22.3
-* Yarn 1.22.15
+* Postgres 14.5
+* Redis 7
+* Node 18.12.1
+* Yarn 1.22.19
 
 The setup process will install dependencies, and automatically configure the database to have a sample patient to work with for your interview.  If you run into any issues with setup, please reach out to your interview team to ask for assistance.
 
 ## First passing spec
 
-Now that your repo is setup, we can start the fun stuff!  First create a new branch off of main to develop on. Next go ahead and run `bundle exec rspec`. You should see one failing spec. As a warm up, add _just enough_ code to make this test pass. Then do a git commit.
+Now that your repo is setup, we can start the fun stuff!  First create a new branch off of `main` to develop on. Next go ahead and run `bundle exec rspec`. You should see one failing spec. As a warm up, add _just enough_ code to make this test pass. Then do a git commit.
 
 ## Part 1: Adding a Patient Questionnaire
 
@@ -80,12 +81,12 @@ As part of the check-in process, we are frequently required to integrate with he
 
 Part 2 of your assignment is to:
 
-- [ ] Retrieve the patient associated with the current check-in using the REST api described below
+- [ ] Retrieve the patient associated with the current check-in using the REST API described below
 - [ ] Add a personalized greeting including the patient's first and last names that's displayed prior to beginning the questionnaire from part 1.
 
 *When* I am starting a checkin
 *I want to* see a personalized greeting
-*so that* I feel confident that the application is trustworthy
+*so that* I feel confident that the application is trustworthy.
 
 ### Additional information about the task
 
@@ -118,4 +119,4 @@ As with part 1, feel free to add as many commits and tests as you feel are appro
 
 ## Submitting your work
 
-When you are ready for us to review your work, please create a PR to the main branch containing your commits from part 1 and part 2.
+When you are ready for us to review your work, please create a pull request to the `main` branch containing your commits from part 1 and part 2.
