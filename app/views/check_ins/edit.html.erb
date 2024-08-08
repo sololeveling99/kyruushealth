@@ -1,0 +1,40 @@
+<div class='form-container'>
+  <%= form_for(@check_in, url: check_in_path(@check_in), method: :patch) do |f| %>
+    <h1>PHQ-9 Screening Part#2</h1>
+    <% if @check_in.errors.any? %>
+      <div id='error_explanation'>
+        <h2><%= pluralize(@check_in.errors.count, 'error') %> prohibited this check_in from being saved:</h2>
+        <ul>
+          <% @check_in.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <h3 class='form-header'>Over the last 2 weeks, how often have you been bothered by any of the following problems?</h3>
+
+    <% @questions.each_with_index do |question, index| %>
+      <div class='form-group field'>
+        <p>
+          <span class='question-index'><%= "#{index + 1}." %></span> <%= question.question_statement %>
+        </p>
+        <div class='options-container'>
+          <% RESPONSE_OPTIONS.each do |option, value| %>
+            <div class='form-check radio-option'>
+              <%= radio_button_tag "check_in_result[questions][#{question.id}][response_option_num]", value, false, required: true, class: 'form-check-input' %>
+              <%= label_tag "check_in_result[questions][#{question.id}][response_option_num]", option, class: 'form-check-label' %>
+            </div>
+          <% end %>
+        </div>
+        <%= hidden_field_tag "check_in_result[questions][#{question.id}][id]", question.id %>
+        <%= hidden_field_tag "check_in_result[questions][#{question.id}][statement]", question.question_statement %>
+      </div>
+    <% end %>
+
+
+    <div class='form-group'>
+      <%= f.submit 'Submit Questionnaire', class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+</div>

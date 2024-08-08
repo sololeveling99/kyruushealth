@@ -2,8 +2,8 @@ require 'net/http'
 require 'json'
 
 class CheckInsController < ApplicationController
-  before_action :set_check_in, only: %i[show]
-  before_action :set_questionnaire, only: %i[new create]
+  before_action :set_check_in, only: %i[edit update show]
+  before_action :set_questionnaire, only: %i[new create edit update]
 
   def new
     @check_in = CheckIn.new
@@ -30,7 +30,7 @@ class CheckInsController < ApplicationController
       additional_screening = questions_response_list.any? { |params| high_score?(params[:response_option_num]) }
 
       if additional_screening
-        redirect_to @check_in, notice: 'Additional screening should be completed.'
+        redirect_to edit_check_in_path(@check_in), notice: 'Additional screening should be completed.'
       else
         redirect_to @check_in, notice: 'Additional screening is not needed.'
       end
@@ -39,15 +39,22 @@ class CheckInsController < ApplicationController
     end
   end
 
-
   def show
     @severity = CheckInResult.determine_severity(@check_in_result.total_score)
     @user = fetch_user
   end
 
+  def edit
+    @questions = @questionnaire&.questions&.order(:order).offset(2)
+  end
+
   def update
-    CheckIn.find(params[:id])
-    redirect_to new_check_in_path
+    if update_check_in_results(check_in_result_params)
+      @severity = CheckInResult.determine_severity(@check_in_result.total_score)
+      redirect_to @check_in, notice: 'Check-in was successfully updated.'
+    else
+      render :edit
+    end
   end
 
   private
@@ -89,6 +96,17 @@ class CheckInsController < ApplicationController
   def save_check_in_results(results)
     check_in_result = find_or_initialize_check_in_result
     check_in_result.response = map_results_to_responses(results)
+    check_in_result.save!
+  end
+
+  def update_check_in_results(results)
+    check_in_result = find_or_initialize_check_in_result
+
+    existing_responses = check_in_result.response || []
+    new_responses = map_results_to_responses(results)
+    updated_responses = (existing_responses + new_responses).uniq { |r| r[:q_id] }
+
+    check_in_result.response = updated_responses
     check_in_result.save!
   end
 
