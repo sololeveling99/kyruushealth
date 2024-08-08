@@ -1,3 +1,46 @@
-<%= form_for(:check_in, url: check_ins_path) do |f| %>
-  <%= f.submit "Start check in" %>
-<% end %>
+<div class='form-container'>
+  <%= form_with(model: @check_in, url: check_ins_path, local: true) do |f| %>
+    <h1>PHQ-9 Screening Part # 1</h1>
+    <h3 class='form-header'>Personal Details</h3>
+    <div class='form-row'>
+      <div class='form-group'>
+        <%= label_tag :first_name %>
+        <%= text_field_tag :first_name, nil, required: true, class: 'form-control' %>
+      </div>
+
+      <div class='form-group'>
+        <%= label_tag :last_name %>
+        <%= text_field_tag :last_name, nil, required: true, class: 'form-control' %>
+      </div>
+
+      <div class='form-group'>
+        <%= f.label :date %>
+        <%= f.date_field :date, required: true, class: 'form-control' %>
+      </div>
+    </div>
+
+    <h3 class='form-header'>Over the last 2 weeks, how often have you been bothered by any of the following problems?</h3>
+
+    <% @questions&.each_with_index do |question, index| %>
+      <div class='form-group field'>
+        <p>
+          <span class='question-index'><%= "#{index + 1}." %></span> <%= question.question_statement %>
+        </p>
+        <div class='options-container'>
+          <% RESPONSE_OPTIONS.each do |option, value| %>
+            <div class='form-check radio-option'>
+              <%= radio_button_tag "check_in_result[questions][#{question.id}][response_option_num]", value, false, required: true, class: 'form-check-input' %>
+              <%= label_tag "check_in_result[questions][#{question.id}][response_option_num]", option, class: 'form-check-label' %>
+            </div>
+          <% end %>
+        </div>
+        <%= hidden_field_tag "check_in_result[questions][#{question.id}][id]", question.id %>
+        <%= hidden_field_tag "check_in_result[questions][#{question.id}][statement]", question.question_statement %>
+      </div>
+    <% end %>
+
+    <div class='form-group'>
+      <%= f.submit 'Start check in', class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+</div>
