@@ -2,6 +2,7 @@ require 'net/http'
 require 'json'
 
 class CheckInsController < ApplicationController
+  before_action :set_check_in, only: %i[show]
   before_action :set_questionnaire, only: %i[new create]
 
   def new
@@ -40,7 +41,8 @@ class CheckInsController < ApplicationController
 
 
   def show
-    @check_in = CheckIn.find(params[:id])
+    @severity = CheckInResult.determine_severity(@check_in_result.total_score)
+    @user = fetch_user
   end
 
   def update
@@ -49,6 +51,11 @@ class CheckInsController < ApplicationController
   end
 
   private
+
+  def set_check_in
+    @check_in = CheckIn.find(params[:id])
+    @check_in_result = CheckInResult.find_by(check_in: @check_in)
+  end
 
   def set_questionnaire
     @questionnaire = Questionnaire.find_by(name: 'PHQ-9')

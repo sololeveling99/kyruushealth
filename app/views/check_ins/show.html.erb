@@ -1,7 +1,17 @@
-<p>Please complete all of the steps on this page:</p>
-<ul>
-  <li>Start PHQ screener</li>
-</ul>
-<%= form_for(:check_in, url: check_in_path, method: :put, id: 1) do |f| %>
-  <%= f.submit "Complete check in" %>
-<% end %>
+<div class='centered-container'>
+  <h3>Thank you, <%= "#{@user['firstName']} #{@user['lastName']}" %>, for completing the PHQ-9 screening!</h3>
+
+  <h4>Check-In Details:</h4>
+
+  <p>
+    <strong>Date:</strong>
+    <%= @check_in.date %>
+  </p>
+
+  <% if @check_in_result %>
+    <h4>Your Total Score: <%= @check_in_result.total_score %></h4>
+    <h4>Depression Severity: <%= @severity %></h4>
+  <% end %>
+
+  <%= button_to 'Start a New Check-In', new_check_in_path, class: 'btn btn-primary', method: :get %>
+</div>
