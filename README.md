@@ -15,7 +15,7 @@ We use the following software versions (if you have previous releases and they w
 * Node 18.12.1
 * Yarn 1.22.19
 
-The setup process will install dependencies, and automatically configure the database to have a sample patient to work with for your interview.  If you run into any issues with setup, please reach out to your interview team to ask for assistance.
+The setup process will install dependencies, and automatically configure the database to have a sample patient to work with for your interview. If you run into any issues with setup, please reach out to your interview team to ask for assistance.
 
 ## First passing spec
 
